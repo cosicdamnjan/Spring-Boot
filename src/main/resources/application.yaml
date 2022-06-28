@@ -1,0 +1,38 @@
+
+spring:
+  profiles:
+    active: database
+
+---
+spring:
+  profiles: database
+  datasource:
+    driverClassName: org.h2.Driver
+    password: password
+    username: sa
+    url: jdbc:h2:mem:mydb
+  h2:
+    console:
+      settings:
+        trace: 'false'
+        web-allow-others: 'false'
+      path: /h2-console
+      enabled: 'true'
+  jpa:
+    defer-datasource-initialization: 'true'
+    database-platform: org.hibernate.dialect.H2Dialect
+
+---
+
+spring:
+  profiles: external
+  datasource:
+    driverClassName: org.postgresql.Driver
+    password: admin
+    username:
+    url: jdbc:postgresql://localhost:5432/hello
+google:
+  translate:
+    endpoint: https://google-translate1.p.rapidapi.com/language/translate/v2
+    apiKey: ${GOOGLE_APIKEY}
+    apiHost: google-translate1.p.rapidapi.com
